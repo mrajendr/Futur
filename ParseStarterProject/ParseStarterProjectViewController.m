@@ -23,6 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+//    var filePath = NSBundle.mainBundle().pathForResource("loading", ofType: "gif")
+//    var gif = NSData(contentsOfFile: filePath!)
+//    
+//    
+//    loading.scalesPageToFit = true;
+//    
+//    loading.loadData(gif, MIMEType: "image/gif", textEncodingName: nil, baseURL: nil)
+//    loading.userInteractionEnabled = false;
+//    loading.scalesPageToFit = true;
+//    
+//    
+//    let timer = NSTimer.scheduledTimerWithTimeInterval(8.0, target: self, selector: "update", userInfo: nil, repeats: false)
+
+    
     cityPickerView.dataSource = self;
     cityPickerView.delegate = self;
     
@@ -40,6 +55,8 @@
     [self performSegueWithIdentifier:@"goToHomePage" sender:nil];
 }
 
+
+
 #pragma mark - Pickerview data source
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -53,6 +70,7 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return [dataSourceArray objectAtIndex:row];
 }
+
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
