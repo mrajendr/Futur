@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface UnemploymentViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextView *dataView;
 
 @end

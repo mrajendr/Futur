@@ -1,21 +1,21 @@
 //
-//  UnemploymentViewController.m
+//  FlightViewController.m
 //  ParseStarterProject
 //
-//  Created by Maathusan Rajendram on 9/12/15.
+//  Created by Maathusan Rajendram on 9/13/15.
 //
 //
 
-#import "UnemploymentViewController.h"
+#import "FlightViewController.h"
 #import <Parse/Parse.h>
 
-@interface UnemploymentViewController ()
+@interface FlightViewController ()
 
 @end
 
-@implementation UnemploymentViewController
+@implementation FlightViewController
 
-@synthesize dataView;
+@synthesize flightStatusView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,10 +26,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (IBAction)showData:(id)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"aat2"];
-    [query whereKey:@"Year" greaterThan:@2010];
+- (IBAction)showFlightData:(id)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"Flight"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
@@ -38,19 +36,18 @@
             //NSLog(@"QUERY RESULTS: %@", objects);
             NSString *data = [[NSString alloc] init];
             for (PFObject *object in objects) {
-                NSLog(@"YEAR: %@", [object objectForKey:@"Year"]);
-                NSLog(@"        Percent UNEMPLOYED: %@", [object objectForKey:@"Unemployed_percent_of_labor_force"]);
+                NSLog(@"DELAYED: %@", [object objectForKey:@"ArrDel15"]);
+                NSLog(@"        VISIBILITY: %@", [object objectForKey:@"Visibility"]);
                 
-                data = [data stringByAppendingString:[NSString stringWithFormat:@"YEAR: %@, Percent UNEMPLOYED: %@ \n", [object objectForKey:@"Year"], [object objectForKey:@"Unemployed_percent_of_labor_force"]]];
+                data = [data stringByAppendingString:[NSString stringWithFormat:@"DELAYED: %@, WEATHER TYPE: %@ \n", [object objectForKey:@"ArrDel15"], [object objectForKey:@"WeatherType"]]];
             }
-            dataView.text = data;
+            flightStatusView.text = data;
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
 }
-
 
 /*
 #pragma mark - Navigation

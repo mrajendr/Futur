@@ -1,25 +1,32 @@
 //
-//  UnemploymentViewController.m
+//  SocialViewController.m
 //  ParseStarterProject
 //
-//  Created by Maathusan Rajendram on 9/12/15.
+//  Created by Maathusan Rajendram on 9/13/15.
 //
 //
 
-#import "UnemploymentViewController.h"
+#import "SocialViewController.h"
 #import <Parse/Parse.h>
 
-@interface UnemploymentViewController ()
+@interface SocialViewController ()
 
 @end
 
-@implementation UnemploymentViewController
+@implementation SocialViewController
 
-@synthesize dataView;
+@synthesize socialTextView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // allow users to be able to tap any where on the screen to dissmiss the keyboard
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+}
+
+-(void)dismissKeyboard {
+    [socialTextView resignFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -27,9 +34,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)showData:(id)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"aat2"];
-    [query whereKey:@"Year" greaterThan:@2010];
+- (IBAction)showSocailData:(id)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"Adult_Income"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
@@ -38,17 +44,21 @@
             //NSLog(@"QUERY RESULTS: %@", objects);
             NSString *data = [[NSString alloc] init];
             for (PFObject *object in objects) {
-                NSLog(@"YEAR: %@", [object objectForKey:@"Year"]);
-                NSLog(@"        Percent UNEMPLOYED: %@", [object objectForKey:@"Unemployed_percent_of_labor_force"]);
+                NSLog(@"EDUCATION: %@", [object objectForKey:@"education"]);
+                NSLog(@"        INCOME: %@", [object objectForKey:@"income"]);
                 
-                data = [data stringByAppendingString:[NSString stringWithFormat:@"YEAR: %@, Percent UNEMPLOYED: %@ \n", [object objectForKey:@"Year"], [object objectForKey:@"Unemployed_percent_of_labor_force"]]];
+                data = [data stringByAppendingString:[NSString stringWithFormat:@"EDUCATION: %@, INCOME: %@ \n", [object objectForKey:@"education"], [object objectForKey:@"income"]]];
             }
-            dataView.text = data;
+            socialTextView.text = data;
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
+}
+
+- (IBAction)goToGraph:(id)sender {
+    [self performSegueWithIdentifier:@"toIncomeGraph" sender:nil];
 }
 
 

@@ -1,21 +1,21 @@
 //
-//  UnemploymentViewController.m
+//  RestaurantViewController.m
 //  ParseStarterProject
 //
-//  Created by Maathusan Rajendram on 9/12/15.
+//  Created by Maathusan Rajendram on 9/13/15.
 //
 //
 
-#import "UnemploymentViewController.h"
+#import "RestaurantViewController.h"
 #import <Parse/Parse.h>
 
-@interface UnemploymentViewController ()
+@interface RestaurantViewController ()
 
 @end
 
-@implementation UnemploymentViewController
+@implementation RestaurantViewController
 
-@synthesize dataView;
+@synthesize showRestaurantData;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,9 +27,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)showData:(id)sender {
-    PFQuery *query = [PFQuery queryWithClassName:@"aat2"];
-    [query whereKey:@"Year" greaterThan:@2010];
+- (IBAction)showRestaurantData:(id)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"restaurant"];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             // The find succeeded.
@@ -38,19 +37,18 @@
             //NSLog(@"QUERY RESULTS: %@", objects);
             NSString *data = [[NSString alloc] init];
             for (PFObject *object in objects) {
-                NSLog(@"YEAR: %@", [object objectForKey:@"Year"]);
-                NSLog(@"        Percent UNEMPLOYED: %@", [object objectForKey:@"Unemployed_percent_of_labor_force"]);
+                NSLog(@"NAME: %@", [object objectForKey:@"name"]);
+                NSLog(@"        ADDRESS: %@", [object objectForKey:@"address"]);
                 
-                data = [data stringByAppendingString:[NSString stringWithFormat:@"YEAR: %@, Percent UNEMPLOYED: %@ \n", [object objectForKey:@"Year"], [object objectForKey:@"Unemployed_percent_of_labor_force"]]];
+                data = [data stringByAppendingString:[NSString stringWithFormat:@"NAME: %@, ADDRESS: %@ \n", [object objectForKey:@"name"], [object objectForKey:@"address"]]];
             }
-            dataView.text = data;
+            showRestaurantData.text = data;
         } else {
             // Log details of the failure
             NSLog(@"Error: %@ %@", error, [error userInfo]);
         }
     }];
 }
-
 
 /*
 #pragma mark - Navigation

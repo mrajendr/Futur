@@ -35,6 +35,17 @@
      [self performSegueWithIdentifier:@"toUnemploymentPage" sender:nil];
 }
 
+- (IBAction)goToSocialStatus:(id)sender {
+    [self performSegueWithIdentifier:@"toSocialStatus" sender:nil];
+}
+
+- (IBAction)goToFlightStatus:(id)sender {
+    [self performSegueWithIdentifier:@"toFlightStatus" sender:nil];
+}
+- (IBAction)goToRestaurant:(id)sender {
+    [self performSegueWithIdentifier:@"goToRestaurants" sender:nil];
+}
+
 /*
 #pragma mark - Navigation
 
