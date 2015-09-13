@@ -24,7 +24,10 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)goBackToMainPage:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+//    [self.parentViewController dismissViewControllerAnimated:YES completion:^{
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }];
+    [self.presentingViewController.presentingViewController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)goToCarData:(id)sender {

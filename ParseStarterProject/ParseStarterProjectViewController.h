@@ -13,8 +13,8 @@
 
 @property (strong, nonatomic)NSArray *dataSourceArray;
 @property (weak, nonatomic) IBOutlet UIPickerView *cityPickerView;
-//@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIImageView *imgView;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end

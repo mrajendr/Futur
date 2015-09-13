@@ -23,7 +23,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSString *filePath = [[NSBundle mainBundle] pathForResource: @"enter" ofType: @"gif"];
     
+    NSData *gifData = [NSData dataWithContentsOfFile: filePath];
+    [self.webView loadData:gifData MIMEType:@"image/gif" textEncodingName:nil baseURL:nil];
 //    var filePath = NSBundle.mainBundle().pathForResource("loading", ofType: "gif")
 //    var gif = NSData(contentsOfFile: filePath!)
 //    
